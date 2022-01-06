@@ -1,0 +1,28 @@
+@use "../materialize-src/sass/materialize";
+
+$i: 10;
+$unit: '%';
+@while $i <= 100 {
+  .width_#{$i} {
+    width: #{$i + $unit};
+  }
+  $i: $i + 10;
+}
+
+.marg {
+  margin: 20px 0;
+}
+
+.auto {
+  margin: auto;
+}
+
+.center {
+  text-align: center;
+}
+
+#btnAddUser {
+  position: absolute;
+  top: 10%;
+  right: 20%;
+}

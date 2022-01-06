@@ -1,0 +1,32 @@
+{% extends "base.html.twig" %}
+
+{% block title %} Articles {% endblock %}
+
+{% block body %}
+    <h1 class="center">Articles : 2</h1>
+
+    <main class="container col">
+
+        <a id="btnAddUser" class="btn-floating btn-large waves-effect waves-light red #0091ea light-blue accent-4"><i class="fas fa-plus"></i></a>
+
+        <div class="col s12 m8 offset-m2 l6 offset-l3 ">
+            <div class="card-panel grey lighten-5 z-depth-1">
+                <h3 class="center #9e9e9e grey-text">{{ article.title }}</h3>
+                <div class="row valign-wrapper">
+                    <div class="col s2">
+                        <img src="{{ article.picture }}" alt="" class="circle responsive-img">
+                    </div>
+                    <div class="col s10">
+              <p class="black-text">
+                {{ article.content }}
+              </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+{% endblock %}
+
+
+
+
