@@ -16,6 +16,7 @@ if (isset($_GET['controller'])) {
             if (isset($_GET['action'])) {
                 switch ($_GET['action']) {
                     case 'add' :
+                        $controller->add();
                         break;
                     case 'edit':
                         break;
@@ -31,6 +32,7 @@ if (isset($_GET['controller'])) {
                         $controller->getArticles();
                         break;
                     case 'add' :
+                        $controller->add();
                         break;
                     case 'edit':
                         break;

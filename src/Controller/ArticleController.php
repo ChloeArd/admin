@@ -22,4 +22,14 @@ class ArticleController extends Controller{
             echo $e->getMessage();
         }
     }
+
+    public function add(): void {
+
+        try {
+            $this->render('addArticle.html.twig');
+        }
+        catch (Error $e) {
+            echo $e->getMessage();
+        }
+    }
 }

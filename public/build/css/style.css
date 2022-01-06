@@ -8148,3 +8148,7 @@ input[type=range]::-ms-thumb {
   top: 10%;
   right: 20%;
 }
+
+.size_20 {
+  font-size: 20px;
+}
