@@ -37,13 +37,13 @@ if (isset($_GET['controller'])) {
                         $controller->add($_POST);
                         break;
                     case 'update':
-                        $controller->update();
+                        $controller->update($_POST);
                         break;
                     case 'delete':
-                        $controller->delete();
+                        $controller->delete($_POST);
                         break;
                     case 'applyUser':
-                        $controller->applyUser();
+                        $controller->applyUser($_POST);
                         break;
                 }
             }

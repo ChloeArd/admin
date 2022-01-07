@@ -44,6 +44,11 @@ class ArticleController extends Controller{
         }
     }
 
+    /**
+     * add a article
+     * @param $fields
+     * @return void
+     */
     public function add($fields): void {
         if (isset($fields['title'], $fields['picture'], $fields['content'])) {
 
@@ -52,7 +57,10 @@ class ArticleController extends Controller{
             $content = htmlentities(trim(ucfirst($fields['content'])));
 
             if (!filter_var($picture, FILTER_VALIDATE_URL) === false) {
+                $manager = new ArticleManager();
+                $article = new Article(null, $title, $picture, $content, null);
 
+                $manager->add($article);
             }
         }
         try {
@@ -63,15 +71,36 @@ class ArticleController extends Controller{
         }
     }
 
-    public function update(): void {
-        try {
-            $this->render('updateArticle.html.twig');
-        }
-        catch (Error $e) {
-            echo $e->getMessage();
+    /**
+     * update a article
+     * @return void
+     */
+    public function update($fields): void {
+        $manager = new ArticleManager();
+
+        if (isset($fields['id'], $fields['title'], $fields['picture'], $fields['content'], $fields['user_fk'])) {
+
+            $id = intval($fields['id']);
+            $title = htmlentities(ucfirst(trim($fields['title'])));
+            $picture = htmlentities(trim($fields['picture']));
+            $content = htmlentities(ucfirst(trim($fields['content'])));
+
+            if (!filter_var($picture, FILTER_VALIDATE_URL) === false) {
+                $article = new Article($id, $title, $picture, $content, $fields['user_fk']);
+
+                $manager->updateArticle($article);
+            }
+
+            try {
+                $this->render('updateArticle.html.twig');
+            }
+            catch (Error $e) {
+                echo $e->getMessage();
+            }
         }
     }
 
+    // apply a user to article
     public function applyUser(): void {
         try {
             $this->render('applyUserArticle.html.twig');
@@ -81,6 +110,10 @@ class ArticleController extends Controller{
         }
     }
 
+    /**
+     * delete a user
+     * @return void
+     */
     public function delete(): void {
         try {
             $this->render('deleteArticle.html.twig');
