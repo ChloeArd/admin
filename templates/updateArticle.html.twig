@@ -1,12 +1,12 @@
 {% extends "base.html.twig" %}
 
-{% block title %} Ajouter un article{% endblock %}
+{% block title %} Modifier un article{% endblock %}
 
 {% block body %}
 
     <main class="container">
 
-        <h1 class="center">Ajouter un article</h1>
+        <h1 class="center">Modifier un article</h1>
 
         <div class="row">
             <form action="" method="post" class="col s12">
@@ -16,6 +16,10 @@
                         <label for="title">Titre</label>
                     </div>
                 </div>
+                <p>Photo actuelle</p>
+                <img src="" alt="" class="responsive-img">
+
+                <p>Modifier la photo</p>
                 <div class="file-field input-field">
                     <div class="btn #0091ea light-blue accent-4">
                         <span>File</span>
@@ -27,7 +31,7 @@
                 </div>
                 <div class="input-field col s12">
                     <textarea id="content" name="content" class="materialize-textarea"></textarea>
-                    <label for="content">Contenu</label>
+                        <label for="content">Contenu</label>
                 </div>
 
                 <input id="addArticle" class="waves-effect waves-light btn #0091ea light-blue accent-4 width_100" type="submit" value="Ajouter">

@@ -24,9 +24,35 @@ class ArticleController extends Controller{
     }
 
     public function add(): void {
-
         try {
             $this->render('addArticle.html.twig');
+        }
+        catch (Error $e) {
+            echo $e->getMessage();
+        }
+    }
+
+    public function update(): void {
+        try {
+            $this->render('updateArticle.html.twig');
+        }
+        catch (Error $e) {
+            echo $e->getMessage();
+        }
+    }
+
+    public function applyUser(): void {
+        try {
+            $this->render('applyUserArticle.html.twig');
+        }
+        catch (Error $e) {
+            echo $e->getMessage();
+        }
+    }
+
+    public function delete(): void {
+        try {
+            $this->render('deleteArticle.html.twig');
         }
         catch (Error $e) {
             echo $e->getMessage();

@@ -44,11 +44,27 @@ class UserController extends Controller {
         }
     }
 
-
     public function add(): void {
-
         try {
             $this->render('addUser.html.twig');
+        }
+        catch (Error $e) {
+            echo $e->getMessage();
+        }
+    }
+
+    public function update(): void {
+        try {
+            $this->render('updateUser.html.twig');
+        }
+        catch (Error $e) {
+            echo $e->getMessage();
+        }
+    }
+
+    public function delete(): void {
+        try {
+            $this->render('deleteUser.html.twig');
         }
         catch (Error $e) {
             echo $e->getMessage();

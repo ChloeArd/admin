@@ -11,19 +11,19 @@
         <table class="marg">
             <thead>
             <tr>
-                <th>Pseudo</th>
-                <th>Email</th>
-                <th><i class="fas fa-user-edit"></i></th>
-                <th><i class="fas fa-user-minus"></i></th>
+                <th class="center">Pseudo</th>
+                <th class="center">Email</th>
+                <th class="center"><i class="fas fa-user-edit"></i></th>
+                <th class="center"><i class="fas fa-user-minus"></i></th>
             </tr>
             </thead>
 
             <tbody>
             <tr>
-                <td>{{ user.pseudo }}</td>
-                <td>{{ user.email }}</td>
-                <td>?</td>
-                <td>?</td>
+                <td class="center">{{ user.pseudo }}</td>
+                <td class="center">{{ user.email }}</td>
+                <td class="center"><a id="btnUpdateUser" href="../../?controller=user&action=update" class="btn-floating btn-large waves-effect waves-light red #ffa000 amber darken-2"><i class="far fa-edit"></i></a></td>
+                <td class="center"><a id="btnDeleteUser" href="../../?controller=user&action=delete" class="btn-floating btn-large waves-effect waves-light red #ff3d00 deep-orange accent-3"><i class="far fa-trash-alt"></i></a></td>
             </tr>
             </tbody>
         </table>

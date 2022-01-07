@@ -1,0 +1,20 @@
+{% extends "base.html.twig" %}
+
+{% block title %} Supprimer un article {% endblock %}
+
+{% block body %}
+
+    <main class="container">
+
+        <h1 class="center">Supprimer un article</h1>
+
+        <div class="row">
+            <h3>Voulez-vous vraiment supprimer cette article ?</h3>
+            <form action="" method="post" class="col s12">
+                <input id="id" name="id" type="hidden" value="">
+
+                <input id="addUser" class="waves-effect waves-light btn #ff3d00 deep-orange accent-3 width_100" type="submit" value="Oui">
+            </form>
+        </div>
+    </main>
+{% endblock %}

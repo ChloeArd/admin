@@ -6,7 +6,6 @@ require '../Config/Config.php';
 use Chloe\Admin\Controller\ArticleController;
 use Chloe\Admin\Controller\UserController;
 
-
 $id = 1;
 
 if (isset($_GET['controller'])) {
@@ -18,12 +17,15 @@ if (isset($_GET['controller'])) {
                     case 'add' :
                         $controller->add();
                         break;
-                    case 'edit':
+                    case 'update':
+                        $controller->update();
                         break;
                     case 'delete':
+                        $controller->delete();
                         break;
                 }
             }
+            break;
         case 'article':
             $controller = new ArticleController();
             if (isset($_GET['action'])) {
@@ -34,14 +36,18 @@ if (isset($_GET['controller'])) {
                     case 'add' :
                         $controller->add();
                         break;
-                    case 'edit':
+                    case 'update':
+                        $controller->update();
                         break;
                     case 'delete':
+                        $controller->delete();
                         break;
                     case 'applyUser':
+                        $controller->applyUser();
                         break;
                 }
             }
+            break;
     }
 }
 else {
