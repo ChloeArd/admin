@@ -6,8 +6,6 @@ require '../Config/Config.php';
 use Chloe\Admin\Controller\ArticleController;
 use Chloe\Admin\Controller\UserController;
 
-$id = 1;
-
 if (isset($_GET['controller'])) {
     switch ($_GET['controller']) {
         case 'user':
