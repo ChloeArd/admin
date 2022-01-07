@@ -90,13 +90,13 @@ class ArticleController extends Controller{
 
                 $manager->updateArticle($article);
             }
+        }
 
-            try {
-                $this->render('updateArticle.html.twig');
-            }
-            catch (Error $e) {
-                echo $e->getMessage();
-            }
+        try {
+            $this->render('updateArticle.html.twig');
+        }
+        catch (Error $e) {
+            echo $e->getMessage();
         }
     }
 

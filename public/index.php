@@ -40,7 +40,7 @@ if (isset($_GET['controller'])) {
                         $controller->update($_POST);
                         break;
                     case 'delete':
-                        $controller->delete($_POST);
+                        $controller->delete($_GET['id']);
                         break;
                     case 'applyUser':
                         $controller->applyUser($_POST);
