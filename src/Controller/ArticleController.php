@@ -114,7 +114,12 @@ class ArticleController extends Controller{
      * delete a user
      * @return void
      */
-    public function delete(): void {
+    public function delete(int $id): void {
+        if (isset($_POST['id'])) {
+            $manager = new ArticleManager();
+            $manager->deleteArticle($id);
+        }
+
         try {
             $this->render('deleteArticle.html.twig');
         }
