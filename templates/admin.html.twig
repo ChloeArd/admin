@@ -3,7 +3,7 @@
 {% block title %} Utilisateurs {% endblock %}
 
 {% block body %}
-    <h1 class="center">Utilisateurs : 2</h1>
+    <h1 class="center">Utilisateurs</h1>
 
     <main class="container col">
 
@@ -19,12 +19,18 @@
             </thead>
 
             <tbody>
+
+            {% for user in users %}
+
             <tr>
                 <td class="center">{{ user.pseudo }}</td>
                 <td class="center">{{ user.email }}</td>
-                <td class="center"><a id="btnUpdateUser" href="../../?controller=user&action=update" class="btn-floating btn-large waves-effect waves-light red #ffa000 amber darken-2"><i class="far fa-edit"></i></a></td>
-                <td class="center"><a id="btnDeleteUser" href="../../?controller=user&action=delete" class="btn-floating btn-large waves-effect waves-light red #ff3d00 deep-orange accent-3"><i class="far fa-trash-alt"></i></a></td>
+                <td class="center"><a id="btnUpdateUser" href="../../?controller=user&action=update&id={{ user.id }}" class="btn-floating btn-large waves-effect waves-light red #ffa000 amber darken-2"><i class="far fa-edit"></i></a></td>
+                <td class="center"><a id="btnDeleteUser" href="../../?controller=user&action=delete&id={{ user.id }}" class="btn-floating btn-large waves-effect waves-light red #ff3d00 deep-orange accent-3"><i class="far fa-trash-alt"></i></a></td>
             </tr>
+
+            {% endfor %}
+
             </tbody>
         </table>
     </main>

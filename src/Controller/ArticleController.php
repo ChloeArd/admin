@@ -4,18 +4,22 @@ namespace Chloe\Admin\Controller;
 
 use Chloe\Admin\Model\Article;
 use Chloe\Admin\Classes\Controller;
+use Chloe\Admin\Model\Manager\ArticleManager;
 use Twig\Error\Error;
 
 class ArticleController extends Controller{
 
-    public function getArticles(): void {
-        $picture = 'https://static.vecteezy.com/packs/media/components/global/search-explore-nav/img/vectors/term-bg-1-666de2d941529c25aa511dc18d727160.jpg';
-
-        $article = (new Article(null, "Article1", $picture, 'bla bla bla', null));
+    /**
+     * display one article
+     * @param int $id
+     * @return void
+     */
+    public function getArticle(int $id) {
+        $manager = new ArticleManager();
 
         try {
             $this->render('articleAdmin.html.twig', [
-                'article' => $article,
+                'article' => $manager->getArticle($id),
             ]);
         }
         catch (Error $e) {
@@ -23,7 +27,34 @@ class ArticleController extends Controller{
         }
     }
 
-    public function add(): void {
+    /**
+     * display all articles
+     * @return void
+     */
+    public function getArticles() {
+        $manager = new ArticleManager();
+
+        try {
+            $this->render('articleAdmin.html.twig', [
+                'articles' => $manager->getArticles(),
+            ]);
+        }
+        catch (Error $e) {
+            echo $e->getMessage();
+        }
+    }
+
+    public function add($fields): void {
+        if (isset($fields['title'], $fields['picture'], $fields['content'])) {
+
+            $title = htmlentities(trim(ucfirst($fields['title'])));
+            $picture = htmlentities(trim($fields['picture']));
+            $content = htmlentities(trim(ucfirst($fields['content'])));
+
+            if (!filter_var($picture, FILTER_VALIDATE_URL) === false) {
+
+            }
+        }
         try {
             $this->render('addArticle.html.twig');
         }

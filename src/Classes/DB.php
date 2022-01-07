@@ -2,6 +2,7 @@
 
 namespace Chloe\Admin\Classes;
 
+use Exception;
 use PDO;
 use PDOException;
 
@@ -38,4 +39,20 @@ class DB {
         }
         return self::$dbInstance;
     }
+}
+
+/**
+ * Allows you to give a random name to an image.
+ * @param string $regularName
+ * @return string
+ */
+function getRandomName(string $regularName) {
+    $infos = pathinfo($regularName);
+    try {
+        $bytes = random_bytes(15) ;
+    }
+    catch (Exception $e) {
+        $bytes = openssl_random_pseudo_bytes(15);
+    }
+    return bin2hex($bytes) . "." . $infos['extension'];
 }

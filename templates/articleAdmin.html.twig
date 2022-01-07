@@ -9,6 +9,8 @@
 
         <a id="btnAddUser" href="../../?controller=article&action=add" class="btn-floating btn-large waves-effect waves-light red #0091ea light-blue accent-4"><i class="fas fa-plus"></i></a>
 
+        {% for article in articles %}
+
         <div class="col s12 m8 offset-m2 l6 offset-l3 ">
             <div class="card-panel grey lighten-5 z-depth-1">
                 <a id="btnUpdateArticle" href="../../?controller=article&action=update" class="btn-floating btn-large waves-effect waves-light red #ffa000 amber darken-2"><i class="far fa-edit"></i></a>
@@ -25,6 +27,8 @@
                 </div>
             </div>
         </div>
+
+        {% endfor %}
     </main>
 {% endblock %}
 

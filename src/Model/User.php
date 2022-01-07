@@ -8,8 +8,8 @@ class User {
 
     private ?int $id;
     private ?string $pseudo;
-    private ?string $password;
     private ?string $email;
+    private ?string $password;
 
     /**
      * @param int|null $id
@@ -17,12 +17,11 @@ class User {
      * @param string|null $password
      * @param string|null $email
      */
-    public function __construct(?int $id = null, ?string $pseudo = null, ?string $password = null, ?string $email = null)
-    {
+    public function __construct(?int $id = null, ?string $pseudo = null, ?string $email = null, ?string $password = null) {
         $this->id = $id;
         $this->pseudo = $pseudo;
-        $this->password = $password;
         $this->email = $email;
+        $this->password = $password;
     }
 
     /**
@@ -30,6 +29,14 @@ class User {
      */
     public function getId(): int {
         return $this->id;
+    }
+
+    /**
+     * @param int|null $id
+     */
+    public function setId(?int $id): ?int {
+        $this->id = $id;
+        return $id;
     }
 
     /**

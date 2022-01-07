@@ -33,6 +33,14 @@ class Article {
     }
 
     /**
+     * @param int|null $id
+     */
+    public function setId(?int $id): ?int {
+        $this->id = $id;
+        return $id;
+    }
+
+    /**
      * @return string|null
      */
     public function getTitle(): ?string {

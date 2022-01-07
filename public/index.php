@@ -15,13 +15,13 @@ if (isset($_GET['controller'])) {
             if (isset($_GET['action'])) {
                 switch ($_GET['action']) {
                     case 'add' :
-                        $controller->add();
+                        $controller->add($_POST);
                         break;
                     case 'update':
-                        $controller->update();
+                        $controller->update($_POST, $_GET['id']);
                         break;
                     case 'delete':
-                        $controller->delete();
+                        $controller->delete($_GET['id']);
                         break;
                 }
             }
@@ -34,7 +34,7 @@ if (isset($_GET['controller'])) {
                         $controller->getArticles();
                         break;
                     case 'add' :
-                        $controller->add();
+                        $controller->add($_POST);
                         break;
                     case 'update':
                         $controller->update();
