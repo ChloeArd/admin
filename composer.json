@@ -15,6 +15,16 @@
     "require": {
         "twig/twig": "^3.3",
       "ext-openssl": "*",
-      "ext-pdo": "*"
+      "ext-pdo": "*",
+        "symfony/form": "^5.4",
+        "twig/extra-bundle": "^v3.3.7",
+        "symfony/orm-pack": "^2.1",
+        "symfony/twig-bundle": "^5.4",
+        "symfony/framework-bundle": "^5.4",
+        "symfony/symfony": "^5.4"
+    },
+    "require-dev": {
+        "symfony/maker-bundle": "^1.36",
+        "symfony/var-dumper": "^5.4"
     }
 }

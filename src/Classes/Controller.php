@@ -28,6 +28,7 @@ class Controller extends Environment {
             'auto_reload' => true
         ]);
 
+
         $this->addExtension(new DebugExtension());
     }
 

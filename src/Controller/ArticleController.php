@@ -2,12 +2,13 @@
 
 namespace Chloe\Admin\Controller;
 
-use Chloe\Admin\Model\Article;
 use Chloe\Admin\Classes\Controller;
+use Chloe\Admin\Model\Article;
 use Chloe\Admin\Model\Manager\ArticleManager;
+use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Twig\Error\Error;
 
-class ArticleController extends Controller{
+class ArticleController extends Controller {
 
     /**
      * display one article
@@ -47,9 +48,8 @@ class ArticleController extends Controller{
     /**
      * add a article
      * @param $fields
-     * @return void
      */
-    public function add($fields): void {
+    public function add($fields) {
         if (isset($fields['title'], $fields['picture'], $fields['content'])) {
 
             $title = htmlentities(trim(ucfirst($fields['title'])));
@@ -60,9 +60,11 @@ class ArticleController extends Controller{
                 $manager = new ArticleManager();
                 $article = new Article(null, $title, $picture, $content, null);
 
+                header("Location:: ../../?controller=article&action=view&success=0");
                 $manager->add($article);
             }
         }
+
         try {
             $this->render('addArticle.html.twig');
         }

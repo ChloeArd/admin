@@ -38,44 +38,51 @@ class UserController extends Controller {
     }
 
     public function add($fields): void {
-        if (isset($fields["pseudo"], $fields["email"], $fields["password"])) {
-            $userManager = new UserManager();
 
-            $pseudo = htmlentities(trim($fields['pseudo']));
-            $email = trim($fields["email"]);
-            $password = htmlentities(trim($fields["password"]));
+        try {
+            if (isset($fields['send'])) {
+                if (isset($fields["pseudo"], $fields["email"], $fields["password"])) {
+                    $userManager = new UserManager();
 
-            // I encrypt the password.
-            $encryptedPassword = password_hash($password, PASSWORD_BCRYPT);
+                    $pseudo = htmlentities(trim($fields['pseudo']));
+                    $email = trim($fields["email"]);
+                    $password = htmlentities(trim($fields["password"]));
 
-            $state = $userManager->getUserEmail($email, $pseudo);
+                    // I encrypt the password.
+                    $encryptedPassword = password_hash($password, PASSWORD_BCRYPT);
 
-            foreach ($state as $user) {
-                // Checks if email or pseudo is not use.
-                if ($user['email'] === $email || $user['pseudo']) {
-                    header("Location: ../../?controller=user&action=add&error=0");
-                } // Check if the email address is valid.
-                elseif (filter_var($email, FILTER_VALIDATE_EMAIL)) {
-                    $maj = preg_match('@[A-Z]@', $password);
-                    $min = preg_match('@[a-z]@', $password);
-                    $number = preg_match('@[0-9]@', $password);
+                    $state = $userManager->getUserEmail($email, $pseudo);
 
-                    // Checks if the password contains upper case, lower case, number and at least 8 characters.
-                    if ($maj && $min && $number && strlen($password) >= 8) {
-                        $user = new User(null, $pseudo, $email, $encryptedPassword);
+                    foreach ($state as $user) {
+                        // Checks if email or pseudo is not use.
+                        if ($user['email'] === $email || $user['pseudo']) {
+                            header("Location: ../../?controller=user&action=add&error=0");
+                        } // Check if the email address is valid.
+                        elseif (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
+                            $maj = preg_match('@[A-Z]@', $password);
+                            $min = preg_match('@[a-z]@', $password);
+                            $number = preg_match('@[0-9]@', $password);
 
-                        $userManager->add($user);
+                            // Checks if the password contains upper case, lower case, number and at least 8 characters.
+                            if ($maj && $min && $number && strlen($password) >= 8) {
+                                $user = new User(null, $pseudo, $email, $encryptedPassword);
 
-                        header("Location: ../../?success=0");
-                    } else {
-                        header("Location: ../../?controller=user&action=add&error=1");
+                                $userManager->add($user);
+
+                                header("Location: ../../?success=0");
+                            } else {
+                                header("Location: ../../?controller=user&action=add&error=1");
+                            }
+                        } else {
+                            header("Location: ../../?controller=user&action=add&error=2");
+                        }
                     }
-                } else {
-                    header("Location: ../../?controller=user&action=add&error=2");
+                }
+                else {
+                    header("Location:: ../../?controller=user&action=add&error=3");
                 }
             }
-        }
-        try {
+
             $this->render('addUser.php.twig');
         }
         catch (Error $e) {
