@@ -131,7 +131,7 @@ class ArticleController extends Controller {
         $articleManager = new ArticleManager();
 
         if (isset($fields['id'], $fields['title'], $fields['picture'], $fields['content'], $fields['user_fk'])) {
-            $id = intval($fields['id']);
+            $idArticle = intval($fields['id']);
             $title = htmlentities(ucfirst(trim($fields['title'])));
             $picture = htmlentities(trim($fields['picture']));
             $content = htmlentities(ucfirst(trim($fields['content'])));
@@ -140,7 +140,7 @@ class ArticleController extends Controller {
             $user_fk = $userManager->getUser($user_fk);
 
             if ($user_fk->getId()) {
-                $article = new Article($id, $title, $picture, $content, $user_fk);
+                $article = new Article($idArticle, $title, $picture, $content, $user_fk);
 
                 $articleManager->applyUserArticle($article);
 
