@@ -2,8 +2,6 @@
 
 namespace Chloe\Admin\Model;
 
-use DateTime;
-
 class User {
 
     private ?int $id;
@@ -27,7 +25,7 @@ class User {
     /**
      * @return int
      */
-    public function getId(): int {
+    public function getId(): ?int {
         return $this->id;
     }
 
@@ -42,7 +40,7 @@ class User {
     /**
      * @return string
      */
-    public function getPseudo(): string {
+    public function getPseudo(): ?string {
         return $this->pseudo;
     }
 
@@ -50,15 +48,15 @@ class User {
      * @param string $pseudo
      * @return User
      */
-    public function setPseudo(string $pseudo): User {
+    public function setPseudo(string $pseudo): ?string {
         $this->pseudo = $pseudo;
-        return $this;
+        return $pseudo;
     }
 
     /**
      * @return string
      */
-    public function getPassword(): string {
+    public function getPassword(): ?string {
         return $this->password;
     }
 
@@ -66,15 +64,15 @@ class User {
      * @param string $password
      * @return User
      */
-    public function setPassword(string $password): User {
+    public function setPassword(string $password): ?string {
         $this->password = $password;
-        return $this;
+        return $password;
     }
 
     /**
      * @return string
      */
-    public function getEmail(): string {
+    public function getEmail(): ?string {
         return $this->email;
     }
 
@@ -82,8 +80,8 @@ class User {
      * @param string $email
      * @return User
      */
-    public function setEmail(string $email): User {
+    public function setEmail(string $email): ?string {
         $this->email = $email;
-        return $this;
+        return $email;
     }
 }

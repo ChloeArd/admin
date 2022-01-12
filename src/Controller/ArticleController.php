@@ -51,18 +51,24 @@ class ArticleController extends Controller {
      * @param $fields
      */
     public function add($fields) {
-        if (isset($fields['title'], $fields['picture'], $fields['content'])) {
+        if (isset($fields['title'], $fields['picture'], $fields['content'], $fields['user_fk'])) {
 
             $title = htmlentities(trim(ucfirst($fields['title'])));
             $picture = htmlentities(trim($fields['picture']));
             $content = htmlentities(trim(ucfirst($fields['content'])));
+            $user_fk = intval($fields['user_fk']);
 
-            if (!filter_var($picture, FILTER_VALIDATE_URL) === false) {
+            if (filter_var($picture, FILTER_VALIDATE_URL)) {
                 $manager = new ArticleManager();
-                $article = new Article(null, $title, $picture, $content, null);
+                $userManager = new UserManager();
+                $user_fk = $userManager->getUser($user_fk);
 
-                header("Location:: ../../?controller=article&action=view&success=0");
-                $manager->add($article);
+                if ($user_fk->getId()) {
+                    $article = new Article(null, $title, $picture, $content, $user_fk);
+
+                    $manager->add($article);
+                    header("Location:: ../../?controller=article&action=view&success=0");
+                }
             }
             else {
                 header("Location: ../?controller=article&action=add&error=0");

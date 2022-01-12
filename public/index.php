@@ -4,7 +4,6 @@ require '../vendor/autoload.php';
 require '../Config/Config.php';
 
 use Chloe\Admin\Controller\ArticleController;
-use Chloe\Admin\Controller\ArticleController2;
 use Chloe\Admin\Controller\UserController;
 
 if (isset($_GET['controller'])) {

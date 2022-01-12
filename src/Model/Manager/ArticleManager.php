@@ -81,7 +81,7 @@ class ArticleManager {
         $request->bindValue(':title', $article->getTitle());
         $request->bindValue(':picture', $article->getPicture());
         $request->bindValue(':content', $article->getContent());
-        $request->bindValue(':user_fk', 1);
+        $request->bindValue(':user_fk', $article->getUserFk()->getId());
 
         return $request->execute() && DB::getInstance()->lastInsertId() != 0;
     }
