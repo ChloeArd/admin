@@ -38,9 +38,6 @@ class UserController extends Controller {
     }
 
     public function add($fields): void {
-
-        try {
-            if (isset($fields['send'])) {
                 if (isset($fields["pseudo"], $fields["email"], $fields["password"])) {
                     $userManager = new UserManager();
 
@@ -51,38 +48,28 @@ class UserController extends Controller {
                     // I encrypt the password.
                     $encryptedPassword = password_hash($password, PASSWORD_BCRYPT);
 
-                    $state = $userManager->getUserEmail($email, $pseudo);
+                    // Check if the email address is valid.
+                    if (!filter_var($email, FILTER_VALIDATE_EMAIL) === false) {
+                        $maj = preg_match('@[A-Z]@', $password);
+                        $min = preg_match('@[a-z]@', $password);
+                        $number = preg_match('@[0-9]@', $password);
 
-                    foreach ($state as $user) {
-                        // Checks if email or pseudo is not use.
-                        if ($user['email'] === $email || $user['pseudo']) {
-                            header("Location: ../../?controller=user&action=add&error=0");
-                        } // Check if the email address is valid.
-                        elseif (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
-                            $maj = preg_match('@[A-Z]@', $password);
-                            $min = preg_match('@[a-z]@', $password);
-                            $number = preg_match('@[0-9]@', $password);
+                        // Checks if the password contains upper case, lower case, number and at least 8 characters.
+                        if ($maj && $min && $number && strlen($password) >= 8) {
+                            $user = new User(null, $pseudo, $email, $encryptedPassword);
 
-                            // Checks if the password contains upper case, lower case, number and at least 8 characters.
-                            if ($maj && $min && $number && strlen($password) >= 8) {
-                                $user = new User(null, $pseudo, $email, $encryptedPassword);
+                            $userManager->add($user);
 
-                                $userManager->add($user);
-
-                                header("Location: ../../?success=0");
-                            } else {
-                                header("Location: ../../?controller=user&action=add&error=1");
-                            }
+                            header("Location: ../../?success=0");
                         } else {
-                            header("Location: ../../?controller=user&action=add&error=2");
+                            header("Location: ../../?controller=user&action=add&error=1");
                         }
+                    } else {
+                        header("Location: ../../?controller=user&action=add&error=2");
                     }
                 }
-                else {
-                    header("Location:: ../../?controller=user&action=add&error=3");
-                }
-            }
 
+        try {
             $this->render('addUser.php.twig');
         }
         catch (Error $e) {
@@ -122,6 +109,7 @@ class UserController extends Controller {
         if (isset($_POST['id'])) {
             $manager = new UserManager();
             $manager->deleteUser($id);
+            header("Location: ../?success=0");
         }
         try {
             $this->render('deleteUser.html.twig');

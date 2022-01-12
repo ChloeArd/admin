@@ -100,26 +100,10 @@ class UserManager {
      * @return bool
      */
     public function updateUser(User $user): bool {
-        $id = $user->getId();
-        $request = DB::getInstance()->prepare("SELECT * FROM user WHERE NOT id = :id");
-        $request->bindValue(':id', $id);
-        $request->execute();
-
-        $user1 = $request->fetchAll();
-        $count = count($user1);
-
-        for ($i = 0; $i < $count; $i++) {
-            // Checks if the email or nickname entered by the user is not already used
-            if ($user1[$i]['email'] === $user->getEmail() || $user1[$i]['pseudo'] === $user->getPseudo()) {
-                header("Location: ../index.php?controller=user&action=update&id=$id&error=2");
-            }
-            else {
-                $request = DB::getInstance()->prepare("UPDATE user SET pseudo = :pseudo, email = :email WHERE id = :id");
-                $request->bindValue(':id', $user->getId());
-                $request->bindValue(':pseudo', $user->setPseudo($user->getPseudo()));
-                $request->bindValue(':email', $user->setEmail($user->getEmail()));
-            }
-        }
+        $request = DB::getInstance()->prepare("UPDATE user SET pseudo = :pseudo, email = :email WHERE id = :id");
+        $request->bindValue(':id', $user->getId());
+        $request->bindValue(':pseudo', $user->setPseudo($user->getPseudo()));
+        $request->bindValue(':email', $user->setEmail($user->getEmail()));
         return $request->execute();
     }
 

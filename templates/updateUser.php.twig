@@ -9,22 +9,26 @@
         <h1 class="center">Modifier un utilisateur</h1>
 
         <div class="row">
+            {% for us in user %}
             <form action="" method="post" class="col s12">
                 <div class="row">
                     <div class="input-field col s12">
-                        <input id="pseudo" name="pseudo" type="text" class="validate" value="">
+                        <input id="pseudo" name="pseudo" type="text" class="validate" value="{{ us.pseudo }}">
                         <label for="pseudo">Pseudo</label>
                     </div>
                 </div>
                 <div class="row">
                     <div class="input-field col s12">
-                        <input id="email" type="email" class="validate">
+                        <input id="email" name="email" type="email" class="validate" value="{{ us.email }}">
                         <label for="email">Email</label>
                     </div>
                 </div>
 
+                <input id="id" name="id" type="hidden" value="{{ us.id }}">
+
                 <input id="addUser" class="waves-effect waves-light btn #0091ea light-blue accent-4 width_100" type="submit" value="Modifier">
             </form>
+            {% endfor %}
 
         </div>
     </main>
