@@ -41,7 +41,7 @@ if (isset($_GET['controller'])) {
                         $controller->delete($_GET['id']);
                         break;
                     case 'applyUser':
-                        $controller->applyUser($_POST);
+                        $controller->applyUser($_POST, $_GET['id']);
                         break;
                 }
             }

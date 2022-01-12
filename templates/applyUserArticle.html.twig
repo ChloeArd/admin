@@ -1,0 +1,30 @@
+{% extends "base.html.twig" %}
+
+{% block title %} Attribuer un utilisateur {% endblock %}
+
+{% block body %}
+    <main class="container">
+
+        <h1 class="center">Attribuer un utilisateur</h1>
+
+        <div class="row">
+            <form action="" method="post" class="col s12">
+                <label>Choisis un utilisateur pour l'article</label>
+                <select class="browser-default marg">
+                    {% for user in users %}
+                    <option id="user_fk" name="user_fk" value="{{ user.id }}">{{ user.pseudo }}</option>
+                    {% endfor %}
+                </select>
+
+                {% for art in article %}
+                    <input id="id" name="id" type="hidden" value="{{ art.id }}">
+                    <input id="title" name="title" type="hidden" value="{{ art.title }}">
+                    <input id="picture" name="picture" type="hidden" value="{{ art.picture }}">
+                    <input id="content" name="content" type="hidden" value="{{ art.content }}">
+                {% endfor %}
+
+                <input id="addUser" name="send" class="waves-effect waves-light btn #0091ea light-blue accent-4 width_100" type="submit" value="Attribuer">
+            </form>
+        </div>
+    </main>
+{% endblock %}

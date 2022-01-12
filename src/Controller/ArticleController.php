@@ -126,9 +126,32 @@ class ArticleController extends Controller {
     }
 
     // apply a user to article
-    public function applyUser(): void {
+    public function applyUser($fields, int $id): void {
+        $userManager = new UserManager();
+        $articleManager = new ArticleManager();
+
+        if (isset($fields['id'], $fields['title'], $fields['picture'], $fields['content'], $fields['user_fk'])) {
+            $id = intval($fields['id']);
+            $title = htmlentities(ucfirst(trim($fields['title'])));
+            $picture = htmlentities(trim($fields['picture']));
+            $content = htmlentities(ucfirst(trim($fields['content'])));
+            $user_fk = intval($fields['user_fk']);
+
+            $user_fk = $userManager->getUser($user_fk);
+
+            if ($user_fk->getId()) {
+                $article = new Article($id, $title, $picture, $content, $user_fk);
+
+                $articleManager->applyUserArticle($article);
+
+                header("Location: ../?controller=article&action=view&success=1");
+            } else {
+                header("Location: ../?controller=article&action=applyUser&id=$id&error=0");
+            }
+        }
+
         try {
-            $this->render('applyUserArticle.html.twig');
+            $this->render('applyUserArticle.html.twig', ["users" => $userManager->getUsers(), "article" => $articleManager->getArticleID($id) ]);
         }
         catch (Error $e) {
             echo $e->getMessage();

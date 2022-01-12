@@ -93,7 +93,7 @@ class ArticleManager {
      */
     public function applyUserArticle(Article $article): bool {
         $request = DB::getInstance()->prepare("UPDATE article SET user_fk = :user_fk WHERE id = :id");
-        $request->bindValue(":user_fk", $article->getUserFk());
+        $request->bindValue(":user_fk", $article->setUserFk((($article->getUserFk()))));
         $request->bindValue(":id", $article->getId());
         return $request->execute();
     }
