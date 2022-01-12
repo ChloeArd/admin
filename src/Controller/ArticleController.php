@@ -5,7 +5,7 @@ namespace Chloe\Admin\Controller;
 use Chloe\Admin\Classes\Controller;
 use Chloe\Admin\Model\Article;
 use Chloe\Admin\Model\Manager\ArticleManager;
-use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Chloe\Admin\Model\Manager\UserManager;
 use Twig\Error\Error;
 
 class ArticleController extends Controller {
@@ -45,6 +45,7 @@ class ArticleController extends Controller {
         }
     }
 
+
     /**
      * add a article
      * @param $fields
@@ -62,6 +63,9 @@ class ArticleController extends Controller {
 
                 header("Location:: ../../?controller=article&action=view&success=0");
                 $manager->add($article);
+            }
+            else {
+                header("Location: ../?controller=article&action=add&error=0");
             }
         }
 
@@ -86,16 +90,29 @@ class ArticleController extends Controller {
             $title = htmlentities(ucfirst(trim($fields['title'])));
             $picture = htmlentities(trim($fields['picture']));
             $content = htmlentities(ucfirst(trim($fields['content'])));
+            $user_fk = intval($fields['user_fk']);
 
             if (!filter_var($picture, FILTER_VALIDATE_URL) === false) {
-                $article = new Article($id, $title, $picture, $content, $fields['user_fk']);
+                $userManager = new UserManager();
+                $user_fk = $userManager->getUser($user_fk);
 
-                $manager->updateArticle($article);
+                if ($user_fk->getId()) {
+                    $article = new Article($id, $title, $picture, $content, $user_fk);
+
+                    $manager->updateArticle($article);
+
+                    header("Location: ../?controller=article&action=view&success=1");
+                } else {
+                    header("Location: ../?controller=article&action=update&id=$id&error=0");
+                }
+            }
+            else {
+                header("Location: ../?controller=article&action=update&id=$id&error=1");
             }
         }
 
         try {
-            $this->render('updateArticle.html.twig');
+            $this->render('updateArticle.html.twig', ['article' => $manager->getArticleID($_GET['id'])]);
         }
         catch (Error $e) {
             echo $e->getMessage();
@@ -120,6 +137,7 @@ class ArticleController extends Controller {
         if (isset($_POST['id'])) {
             $manager = new ArticleManager();
             $manager->deleteArticle($id);
+            header("Location: ../?controller=article&action=view&success=1");
         }
 
         try {

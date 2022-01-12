@@ -21,14 +21,14 @@
             <tbody>
 
             {% for user in users %}
-
-            <tr>
-                <td class="center">{{ user.pseudo }}</td>
-                <td class="center">{{ user.email }}</td>
-                <td class="center"><a id="btnUpdateUser" href="../../?controller=user&action=update&id={{ user.id }}" class="btn-floating btn-large waves-effect waves-light red #ffa000 amber darken-2"><i class="far fa-edit"></i></a></td>
-                <td class="center"><a id="btnDeleteUser" href="../../?controller=user&action=delete&id={{ user.id }}" class="btn-floating btn-large waves-effect waves-light red #ff3d00 deep-orange accent-3"><i class="far fa-trash-alt"></i></a></td>
-            </tr>
-
+                <tr>
+                    <td class="center">{{ user.pseudo }}</td>
+                    <td class="center">{{ user.email }}</td>
+                    <td class="center"><a id="btnUpdateUser" href="../../?controller=user&action=update&id={{ user.id }}" class="btn-floating btn-large waves-effect waves-light red #ffa000 amber darken-2"><i class="far fa-edit"></i></a></td>
+                    <td class="center"><a id="btnDeleteUser" href="../../?controller=user&action=delete&id={{ user.id }}" class="btn-floating btn-large waves-effect waves-light red #ff3d00 deep-orange accent-3"><i class="far fa-trash-alt"></i></a></td>
+                </tr>
+            {% else %}
+                <p>Il n'y a pas encore d'utilisateurs d'inscrits !</p>
             {% endfor %}
 
             </tbody>

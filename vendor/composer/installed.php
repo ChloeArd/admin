@@ -5,7 +5,7 @@
         'type' => 'project',
         'install_path' => __DIR__ . '/../../',
         'aliases' => array(),
-        'reference' => 'e388c2e5dcff73ae72d3439df5a207352eb085f1',
+        'reference' => 'fdddb0339453efe3e7fdd7f3cb6f7808b616055a',
         'name' => 'chloe/admin',
         'dev' => true,
     ),
@@ -16,7 +16,7 @@
             'type' => 'project',
             'install_path' => __DIR__ . '/../../',
             'aliases' => array(),
-            'reference' => 'e388c2e5dcff73ae72d3439df5a207352eb085f1',
+            'reference' => 'fdddb0339453efe3e7fdd7f3cb6f7808b616055a',
             'dev_requirement' => false,
         ),
         'composer/package-versions-deprecated' => array(

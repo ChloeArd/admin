@@ -2,9 +2,7 @@
 
 namespace Chloe\Admin\Model;
 
-use Twig\Extension\AbstractExtension;
-
-class Article extends AbstractExtension{
+class Article{
 
     private ?int $id;
     private ?string $title;

@@ -41,7 +41,11 @@ class ArticleManager {
         $request->bindParam(":id", $id);
         if($request->execute()) {
             foreach($request->fetchAll() as $info) {
-                $article[] = new Article($info['id'], $info['pseudo'], $info['email'], $info['password']);
+                $userManager = new UserManager();
+                $user = $userManager->getUser($info['user_fk']);
+                if($user->getId()) {
+                    $article[] = new Article($info['id'], $info['title'], $info['picture'], $info['content'], $user);
+                }
             }
         }
         return $article;
