@@ -20,7 +20,7 @@ class ArticleController extends Controller {
 
         try {
             $this->render('articleAdmin.html.twig', [
-                'article' => $manager->getArticle($id),
+                'article' => $manager->getArticleID($id),
             ]);
         }
         catch (Error $e) {
