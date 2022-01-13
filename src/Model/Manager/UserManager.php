@@ -14,7 +14,6 @@ class UserManager {
      */
     public function getUser(int $id): User {
         $request = DB::getInstance()->prepare("SELECT * FROM user WHERE id = :id");
-        $id = intval($id);
         $request->bindParam(":id", $id);
         $request->execute();
         $info = $request->fetch();
@@ -23,7 +22,7 @@ class UserManager {
             $user->setId($info['id']);
             $user->setPseudo($info['pseudo']);
             $user->setEmail($info['email']);
-            $user->setPassword($info['password']); // We do not display the password
+            $user->setPassword($info['password']);
         }
         return $user;
     }
