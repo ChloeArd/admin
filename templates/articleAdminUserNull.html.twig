@@ -1,15 +1,14 @@
 {% extends "base.html.twig" %}
 
-{% block title %} Articles {% endblock %}
+{% block title %} Articles sans utilisateurs{% endblock %}
 
 {% block body %}
-    <h1 class="center">Articles avec utilisateurs</h1>
+    <h1 class="center">Articles sans utilisateurs</h1>
 
     <main class="container col">
 
         <a id="btnAddUser" href="../../?controller=article&action=add" class="btn-floating btn-large waves-effect waves-light red #0091ea light-blue accent-4"><i class="fas fa-plus"></i></a>
-        <a href="../../?controller=article&action=viewNull"  class="waves-effect waves-light btn #0091ea light-blue accent-4">Sans utilisateurs</a>
-
+        <a href="../../?controller=article&action=view"  class="waves-effect waves-light btn #0091ea light-blue accent-4">Avec utilisateurs</a>
 
         {% for article in articles %}
             <div class="col s12 m8 offset-m2 l6 offset-l3 ">
@@ -24,10 +23,9 @@
                             <img src="{{ article.picture }}" alt="" class="responsive-img">
                         </div>
                         <div class="col s10">
-                  <p class="black-text size_20"> {{ article.content }} </p>
+                            <p class="black-text size_20"> {{ article.content }} </p>
                         </div>
                     </div>
-                    <p>De : {{ article.userFk.pseudo }}</p>
                 </div>
             </div>
         {% else %}

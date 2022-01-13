@@ -45,6 +45,23 @@ class ArticleController extends Controller {
         }
     }
 
+    /**
+     * display all articles without user.
+     * @return void
+     */
+    public function getArticlesUserNull() {
+        $manager = new ArticleManager();
+
+        try {
+            $this->render('articleAdminUserNull.html.twig', [
+                'articles' => $manager->getArticlesUserNull(),
+            ]);
+        }
+        catch (Error $e) {
+            echo $e->getMessage();
+        }
+    }
+
 
     /**
      * add a article
@@ -60,15 +77,15 @@ class ArticleController extends Controller {
 
             if (filter_var($picture, FILTER_VALIDATE_URL)) {
                 $manager = new ArticleManager();
-                $userManager = new UserManager();
+                /*$userManager = new UserManager();
                 $user_fk = $userManager->getUser($user_fk);
 
-                if ($user_fk->getId()) {
-                    $article = new Article(null, $title, $picture, $content, $user_fk);
+                if ($user_fk->getId()) {*/
+                    $article = new Article(null, $title, $picture, $content, null);
 
                     $manager->add($article);
                     header("Location:: ../../?controller=article&action=view&success=0");
-                }
+                /*}*/
             }
             else {
                 header("Location: ../?controller=article&action=add&error=0");

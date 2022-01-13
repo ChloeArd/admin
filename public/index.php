@@ -31,6 +31,9 @@ if (isset($_GET['controller'])) {
                     case 'view':
                         $controller->getArticles();
                         break;
+                    case 'viewNull':
+                        $controller->getArticlesUserNull();
+                        break;
                     case 'add' :
                         $controller->add($_POST);
                         break;

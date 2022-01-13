@@ -57,7 +57,8 @@ class ArticleManager {
      */
     public function getArticles(): array {
         $articles = [];
-        $request = DB::getInstance()->prepare("SELECT * FROM article");
+        $request = DB::getInstance()->prepare("SELECT * FROM article WHERE user_fk != :user_fk");
+        $request->bindValue(":user_fk", "");
         $result = $request->execute();
         if($result) {
             foreach($request->fetchAll() as $info) {
@@ -72,6 +73,24 @@ class ArticleManager {
     }
 
     /**
+     * Return all articles without user.
+     * @return array
+     */
+    public function getArticlesUserNull(): array {
+        $articles = [];
+        $request = DB::getInstance()->prepare("SELECT * FROM article WHERE user_fk = :user_fk ");
+        $request->bindValue(":user_fk", null);
+        $result = $request->execute();
+        if($result) {
+            foreach($request->fetchAll() as $info) {
+                $articles[] = new Article($info['id'], $info['title'], $info['picture'], $info['content'],null);
+            }
+        }
+        return $articles;
+    }
+
+
+    /**
      * @param Article $article
      * @return bool
      */
@@ -81,7 +100,7 @@ class ArticleManager {
         $request->bindValue(':title', $article->getTitle());
         $request->bindValue(':picture', $article->getPicture());
         $request->bindValue(':content', $article->getContent());
-        $request->bindValue(':user_fk', $article->getUserFk()->getId());
+        $request->bindValue(':user_fk', /*$article->getUserFk()->getId()*/ null);
 
         return $request->execute() && DB::getInstance()->lastInsertId() != 0;
     }
